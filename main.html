@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anish Reddy Nukala — Portfolio</title>
+  <meta name="description" content="Portfolio of Anish Reddy Nukala — Computer Science student at Iowa State University. Front-end, data workflows, clean UIs." />
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="stylesheet" href="contact.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Anish Reddy Nukala — Portfolio">
+  <meta property="og:description" content="Front-end focused CS student who ships clean UIs and tidy data workflows.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop">
+
+  <style>
+    /* ===== Base tokens ===== */
+    :root{
+      --bg:#0a0a0a; --bg-2:#111213; --paper:#ffffff; --ink:#0e0e0e; --ink-inv:#f3f4f6;
+      --muted:#a3a3a3; --line:#2a2a2a; --accent:#9ca3af;
+      --brand:#6b7280;            /* GREY brand (used for lines/progress etc.) */
+      --spot-alpha:0.10; --ring:#6b728066;
+      --gray-text:#9ca3af; 
+      --gray-200:#e5e7eb; --gray-300:#d1d5db; --gray-400:#9ca3af; --gray-500:#6b7280; 
+      --gray-600:#4b5563; --gray-700:#374151; --gray-800:#1f2937;
+    }
+    html.light{
+      --bg:#f8fafc; --bg-2:#ffffff; --paper:#ffffff; --ink:#0b0b0b; --ink-inv:#0b0b0b; --muted:#5b5b5b; --line:#e5e7eb; --accent:#6b7280; --spot-alpha:0.0;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    html,body{margin:0}
+    body{
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--ink-inv); background:var(--bg);
+      background-image:
+        radial-gradient(1200px 400px at 100% -10%, rgba(255,255,255,0.06), transparent 60%),
+        radial-gradient(900px 300px at -10% 110%, rgba(255,255,255,0.05), transparent 60%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 60px);
+      position:relative; --mx:50%; --my:50%;
+    }
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none;
+      background: radial-gradient(180px 180px at var(--mx) var(--my), rgba(255,255,255,var(--spot-alpha)), rgba(255,255,255,0) 60%);
+      mix-blend-mode:screen; transition:opacity .25s ease; opacity:1; z-index:0;
+    }
+    .wrap{max-width:1060px;margin:0 auto;padding:24px}
+
+    /* Utilities */
+    .reveal{opacity:0;transform:translateY(8px);transition:all .5s ease}
+    .reveal._in{opacity:1;transform:none}
+    .grid{display:grid;gap:12px;align-items:stretch}
+    .two{grid-template-columns:1fr 1fr}
+    .three{grid-template-columns:repeat(3,1fr)}
+    .meta{font-size:13px;color:#c0c0c0}
+    html.light .meta{color:#4b5563}
+    .ornament{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);margin:18px 0}
+    html.light .ornament{background:linear-gradient(90deg,transparent,rgba(0,0,0,.25),transparent)}
+    .btn{display:inline-block;background:#fff;color:#000;text-decoration:none;padding:10px 14px;border-radius:10px;font-weight:600;border:1px solid #fff}
+    .btn.outline{background:transparent;color:#fff;border:1px solid #fff}
+    html.light .btn.outline{color:#111;border-color:#111}
+    .card{
+      position:relative; background:linear-gradient(180deg, var(--bg-2), color-mix(in oklab, var(--bg-2) 90%, #000 10%));
+      border:1px solid var(--line); border-radius:14px; padding:18px; display:flex; flex-direction:column; min-height:100%;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .card:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.25); border-color:#3a3a3a}
+    section{padding:22px 0}
+    @media (max-width: 860px){
+      .wrap{padding:16px}
+      .three{grid-template-columns:1fr}
+      .two{grid-template-columns:1fr}
+    }
+
+    /* ===== Section headings (white) ===== */
+    .section-head{
+      margin:0 0 10px;
+      font-family:'IBM Plex Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font-weight:700; font-size:22px; letter-spacing:.2px; color:#fff;
+      display:flex; align-items:center; gap:8px; text-shadow:0 0 6px rgba(255,255,255,.25);
+    }
+    html.light .section-head{color:#111; text-shadow:none}
+    .section-head + .ornament { margin-top:8px; }
+    .card strong, .card h4, .card h5 { font-family:'IBM Plex Sans', system-ui; }
+
+    /* ===== Navbar + Hero ===== */
+    .nav{
+      position:fixed; top:0; left:0; width:100%; height:70px;
+      display:flex; align-items:center; justify-content:space-between; padding:0 6%;
+      background:#000; z-index:100; box-shadow:0 2px 5px rgba(255,255,255,0.08);
+      border-bottom:1px solid var(--brand); /* GREY underline */
+    }
+    .logo{max-height:60px; width:auto; transition:transform .3s ease; object-fit:contain; filter:brightness(0) invert(1)}
+    .logo:hover{transform:scale(1.05)}
+    .nav .right{display:flex; gap:24px; align-items:center}
+    .nav a{ text-decoration:none; color:#fff; font-weight:600; padding:6px 10px; transition:all .3s ease; text-shadow:0 0 6px rgba(255,255,255,.25) }
+    .nav a.active{ text-shadow:0 0 15px rgba(255,255,255,.9), 0 0 25px rgba(255,255,255,.8) }
+    .nav a:hover{ transform:scale(1.07); text-shadow:0 0 10px rgba(255,255,255,.7) }
+    .resume-btn{ border:1px solid rgba(255,255,255,.8); padding:8px 16px; border-radius:0; background:transparent; color:#fff; box-shadow:0 0 12px rgba(255,255,255,.25); transition:all .3s ease; position:relative }
+    .resume-btn::before{ content:""; position:absolute; inset:-4px; background:radial-gradient(circle, rgba(255,255,255,.15), transparent 70%); border-radius:0; z-index:-1; opacity:.8; filter:blur(6px); transition:opacity .3s ease, filter .3s ease }
+    .resume-btn:hover{ border-color:#fff; box-shadow:0 0 25px rgba(255,255,255,.6); transform:scale(1.06) }
+    .resume-btn:hover::before{ opacity:1; filter:blur(10px) }
+
+    /* progress line GREY */
+    .scroll-line{ position:fixed; top:70px; left:0; height:3px; background:var(--brand); width:0; z-index:99; transition:width .1s linear }
+
+    header#top{
+      height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:0 6%;
+    }
+    .hello{ color:var(--gray-text); font-size:18px; margin-bottom:10px }
+    .name{
+      font-size:52px; font-family:'Fira Code', monospace; color:#ffffff; margin:0; overflow:hidden; border-right:3px solid #ffffff;
+      white-space:nowrap; width:0; animation:typing 3s steps(30,end) forwards, blink .8s infinite;
+    }
+    @keyframes typing{ from{width:0} to{width:50%} }
+    @keyframes blink{ 50%{border-color:transparent} }
+    .subtitle{ color:var(--gray-text); font-size:18px; margin-top:20px }
+
+    main{ margin-top: 0 }
+    .spacer-70{ height:70px }
+
+    /* ===== Work Experience ===== */
+    .xp-list{display:grid;gap:16px}
+    .xp-card{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:linear-gradient(180deg, var(--bg-2), color-mix(in oklab, var(--bg-2) 90%, #000 10%));
+      padding:18px;
+    }
+    .xp-grid{
+      display:grid;
+      grid-template-columns: 180px 1fr;
+      gap:18px;
+      align-items:start;
+    }
+    .xp-when{font-family:'IBM Plex Sans', system-ui;font-weight:600;color:#e5e7eb;opacity:.9}
+    .xp-title{font-family:'IBM Plex Sans', system-ui;font-size:22px;font-weight:700;letter-spacing:.2px;margin:0 0 8px;color:#fff;text-shadow:0 0 6px rgba(255,255,255,.25)}
+    .xp-desc{margin:8px 0 14px; color:#d1d5db}
+    .skills{display:flex;flex-wrap:wrap;gap:8px}
+    .skill-pill{
+      --p-bg:rgba(107,114,128,.20); --p-text:#d1d5db;   /* GREY pill */
+      background:var(--p-bg); color:var(--p-text);
+      border:1px solid rgba(156,163,175,.45); border-radius:10px;
+      padding:6px 10px; font-weight:700; font-size:12.5px; letter-spacing:.2px;
+      box-shadow:0 0 18px rgba(0,0,0,.15) inset, 0 0 10px rgba(0,0,0,.12);
+    }
+    @media (max-width: 720px){ .xp-grid{grid-template-columns:1fr} .xp-when{order:2} }
+
+    /* ===== Featured Project (center text; badge RIGHT) ===== */
+    .featured{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap:24px; align-items:center; margin-top:10px;
+    }
+    .proj-card{
+      position:relative; z-index:2;
+      background:linear-gradient(180deg, var(--bg-2), #000);
+      border:1px solid var(--line); border-radius:0;
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+      text-align:center;
+      padding:56px 28px 28px;
+      min-width:500px; min-height:420px;
+      box-shadow:0 12px 28px rgba(0,0,0,.4);
+      transform:translateX(8%);
+    }
+    .proj-card .badge{
+      position:absolute; top:14px; right:14px;
+      color:var(--gray-300); font-weight:700; font-size:14px; letter-spacing:.35px;
+      margin:0; display:block; text-align:right;
+    }
+    .proj-card h3{font-size:24px;margin:0;color:#fff;font-weight:700}
+    .proj-card p{color:#d1d5db;margin:0 0 6px}
+    .proj-actions{margin-top:10px;display:flex;gap:10px;justify-content:center}
+    .github-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid #fff;color:#fff;text-decoration:none;padding:8px 14px;font-weight:700;border-radius:0;background:transparent}
+    .github-btn svg{fill:currentColor}
+
+    .proj-img{
+      position:relative; z-index:1;
+      border:1px solid var(--line); border-radius:0; overflow:hidden;
+      min-height:320px; aspect-ratio:16/10; box-shadow:0 12px 32px rgba(0,0,0,.25);
+    }
+    .proj-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.82) contrast(1.02)}
+
+    @media (max-width: 900px){
+      .featured{grid-template-columns:1fr}
+      .proj-card{transform:none}
+      .proj-img{aspect-ratio:auto; min-height:280px;}
+    }
+
+    /* ===== Other Projects ===== */
+    .op-head{color:#fff;font-weight:700;font-size:14px;letter-spacing:.35px;margin-bottom:10px}
+    .proj-blurb{color:#d1d5db; margin:8px 0 0}
+
+    /* ===== Leadership Skills (tag cloud) — GREY ===== */
+    .soft-skill-cloud{display:flex;flex-wrap:wrap;gap:10px}
+    .soft-pill{
+      background:#16181d; color:#cbd5e1; border:1px solid rgba(156,163,175,.45);
+      padding:8px 12px; border-radius:999px; font-weight:700; font-size:12.5px;
+      box-shadow:0 0 14px rgba(0,0,0,.18) inset;
+    }
+
+    /* ===== Technical Skills: match project small cards (dark/grey) ===== */
+    #skills .grid .card{
+      background:linear-gradient(180deg, var(--bg-2), color-mix(in oklab, var(--bg-2) 90%, #000 10%));
+      color:#e5e7eb;
+      border-color:var(--line);
+      box-shadow:0 10px 24px rgba(0,0,0,.20);
+    }
+    #skills .grid .card strong{color:#ffffff}
+    #skills .grid .card .meta{color:#cbd5e1}
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="nav">
+    <a class="brand" href="#top">
+      <img src="assets/images/Anish Nukala (748 x 350 px).svg" alt="Logo" class="logo">
+    </a>
+    <div class="right">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#contact">Contact</a>
+      <a class="resume-btn" href="#resume" id="printBtn">Resume</a>
+    </div>
+  </nav>
+
+  <div class="scroll-line" id="scroll-line"></div>
+
+  <!-- Hero -->
+  <header id="top" aria-label="Hero">
+    <div class="hello">Hello, my name is</div>
+    <h1 class="name">&lt;&lt; Anish Reddy Nukala &gt;&gt;</h1>
+    <div class="subtitle">Aspiring Software Engineer Intern | CS @ Iowa State University</div>
+  </header>
+
+  <div class="spacer-70" aria-hidden="true"></div>
+
+  <!-- Content -->
+  <main id="main" class="wrap" tabindex="-1">
+    <!-- About -->
+    <section id="about">
+      <h2 class="section-head">// About Me</h2>
+      <div class="ornament"></div>
+      <div class="card reveal">
+        <p>Computer Science junior at Iowa State University with hands-on experience in data structures, software engineering, and web development. I am skilled in Java, Python, HTML, CSS, JavaScript, and Firebase, as well as collaborative tools such as MS Office, Figma, and Canva. My experience includes building and maintaining client data systems, creating process documentation, and enhancing team operations through internships and campus roles.
+
+I am passionate about software engineering, problem-solving, and innovation. I apply my technical knowledge to create scalable solutions and streamline workflows. I am seeking internships in software engineering, artificial intelligence, and technology-driven projects to apply my technical expertise, expand my professional experience, and contribute to meaningful outcomes.</p>
+        <details style="margin-top:10px"><summary style="cursor:pointer">Focus areas</summary>
+          <ul class="clean">
+            <li><strong>Front-end:</strong> semantic HTML, accessible CSS, small JS interactions</li>
+            <li><strong>Data:</strong> Excel pivots, simple SQL, clean exports & repeatable steps</li>
+            <li><strong>Docs:</strong> getting-started guides so teams can self-serve</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <h2 class="section-head">// Education</h2>
+      <div class="ornament"></div>
+      <div class="card reveal">
+        <div class="grid two">
+          <div>
+            <strong>Iowa State University — Ames, IA</strong>
+            <div class="meta">Aug 2023 – Expected May 2027</div>
+          </div>
+          <div>
+            <div><strong>B.S. in Computer Science</strong></div>
+            <div><strong>Minor in Entrepreneurship & Applied AI</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <h2 class="section-head">// Work Experience</h2>
+      <div class="ornament"></div>
+
+      <!-- AJC Internship -->
+    <article class="xp-card reveal"></article>
+      <article class="xp-card reveal">
+        <div class="xp-grid">
+          <div class="xp-when">May 2025 – Aug 2025 
+             Franklin, Tennessee </div>
+          <div>
+            <h3 class="xp-title">Intern — Data & Operations Management, American Job Centers of Middle TN</h3>
+            <p class="xp-desc">
+              Maintained and organized large volumes of client information in Excel, ensuring records were accurate, consistent, and regularly updated.
+              Implemented quality checks that reduced errors and improved reliability of client data used for reporting.
+            </p>
+            <p class="xp-desc">
+              Developed comprehensive user manuals and step-by-step process guides so colleagues could complete technical and administrative tasks
+              with greater efficiency and independence; trained new staff and interns on data entry procedures, client communication protocols, and organizational workflows.
+            </p>
+            <p class="xp-desc">
+              Served as a primary point of contact for client inquiries and application follow-ups—providing timely support and resolving issues to
+              improve client satisfaction and help applicants move smoothly through service pipelines. Drafted professional correspondence,
+              coordinated information between staff and clients, and contributed to budget preparation while streamlining team operations and
+              supporting organizational decision-making.
+            </p>
+          </div>
+        </div>
+      </article>
+      </div>
+    </div>
+
+      <div class="xp-list">
+        <!-- Team Lead -->
+        <article class="xp-card reveal">
+          <div class="xp-grid">
+            <div class="xp-when">Jul 2024 – Present
+                 Ames, Iowa</div>
+            <div>
+              <h3 class="xp-title">Team Lead — IT & Media Production, CELT (Iowa State University)</h3>
+              <p class="xp-desc">
+                Lead and coordinate a media production team to deliver high-quality educational content aligned with faculty teaching goals.
+                Provide technical support and IT troubleshooting to ensure smooth media production, streaming, and delivery across campus platforms.
+                Mentor and train media staff, building skills in audio-visual systems, video editing tools, and digital learning technologies.
+                Oversee project execution, ensuring efficiency, quality control, and adherence to accessibility and branding standards.
+              </p>
+              <div class="skills">
+                <span class="skill-pill">Team Leadership</span>
+                <span class="skill-pill">AV Systems</span>
+                <span class="skill-pill">Accessibility</span>
+                <span class="skill-pill">Production Ops</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Media Production Staff -->
+        <article class="xp-card reveal">
+          <div class="xp-grid">
+            <div class="xp-when">Jan 2024 – Jul 2024 
+                 Ames, Iowa</div>
+            <div>
+              <h3 class="xp-title">Media Production Staff — CELT (Iowa State University)</h3>
+              <p class="xp-desc">
+                Operated and maintained audio-visual systems—cameras, microphones, and recording equipment—for reliable, high-quality lecture and event capture.
+                Edited and produced video content (Echo360 and other tools) while aligning with university branding and accessibility compliance.
+                Collaborated with faculty and staff to integrate digital media, streaming, and classroom technology into instruction to enhance the learning experience.
+                Provided technical support for live class recordings, troubleshooting AV issues and ensuring uninterrupted, high-quality delivery.
+              </p>
+              <div class="skills">
+                <span class="skill-pill">Echo360</span>
+                <span class="skill-pill">Video Editing</span>
+                <span class="skill-pill">Event Capture</span>
+                <span class="skill-pill">Support</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <h2 class="section-head">// Projects</h2>
+      <div class="ornament"></div>
+
+      <!-- Featured Project -->
+      <div class="featured reveal">
+        <div class="proj-card">
+          <div class="badge">// Featured Project</div>
+          <h3>Explore Ames — City Guide Web App</h3>
+          <p>
+            A responsive web app to help students and visitors discover Ames. Browse cafés, parks, study spots, and events
+            with clean filters and quick info sheets. Built for speed and clarity using semantic HTML, accessible CSS, and small JS.
+          </p>
+          <div class="skills" aria-label="Used software" style="justify-content:center">
+            <span class="skill-pill">HTML</span>
+            <span class="skill-pill">CSS</span>
+            <span class="skill-pill">JavaScript</span>
+            <span class="skill-pill">JSON</span>
+            <span class="skill-pill">Bootstrap</span>
+            <span class="skill-pill">Figma</span>
+            <span class="skill-pill">Github</span>
+          </div>
+          <div class="proj-actions">
+            <a class="github-btn" href="https://github.com/yourusername/explore-ames" target="_blank" rel="noreferrer" aria-label="Open GitHub repository">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.31-5.48-1.34-5.48-5.95 0-1.31.47-2.39 1.24-3.23-.12-.31-.54-1.56.12-3.26 0 0 1.01-.32 3.31 1.23a11.5 11.5 0 0 1 6.02 0c2.3-1.55 3.31-1.23 3.31-1.23.66 1.7.24 2.95.12 3.26.77.84 1.24 1.92 1.24 3.23 0 4.62-2.81 5.63-5.49 5.94.43.37.81 1.1.81 2.22v3.29c0 .32.21.69.82.58A12 12 0 0 0 12 .5z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <a class="proj-img" href="#" aria-label="Open Explore Ames project (demo)">
+          <img src="assets/images/explore ames.png" alt="Explore Ames project screenshot" loading="lazy">
+        </a>
+      </div>
+
+      <br><br>
+
+      <!-- Other projects -->
+      <div class="card reveal" style="margin-top:18px">
+        <div class="op-head">// Other Projects</div>
+        <div class="grid two" id="projectGrid">
+          <article class="card project" data-tags="frontend">
+            <h4>Product Catalog Website</h4>
+            <div class="meta">Construction of User Interfaces (COMS 3190)</div>
+            <p class="proj-blurb">
+              Multi-page responsive catalog with cards, FAQs, and author profiles. Built with HTML, Bootstrap, CSS, and JS;
+              used GitLab issues/branches/MRs and reusable components to keep the UI consistent and the workflow clean.
+            </p>
+          </article>
+
+          <article class="card project" data-tags="java data">
+            <h4>Archived Message Reconstruction</h4>
+            <div class="meta">Data Structures in Java (COMS 2280)</div>
+            <p class="proj-blurb">
+              Implemented DFS/BFS across directed and undirected graphs to reconstruct sequences. Verified correctness with traces
+              and weighed runtime trade-offs between traversal strategies.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h2 class="section-head">// Technical Skills</h2>
+      <div class="ornament"></div>
+      <div class="card reveal">
+        <div class="grid three">
+          <div class="card"><strong>Programming</strong><div class="meta">Java, Python, JavaScript, HTML5, CSS3</div></div>
+          <div class="card"><strong>Frameworks & Libraries</strong><div class="meta">React, Bootstrap, Node.js</div></div>
+          <div class="card"><strong>Databases & Analytics</strong><div class="meta">MySQL, Power BI, Excel (Pivot Tables)</div></div>
+          <div class="card"><strong>Cloud</strong><div class="meta">Firebase</div></div>
+          <div class="card"><strong>Version Control & Collaboration</strong><div class="meta">Git, GitLab</div></div>
+          <div class="card"><strong>Tools</strong><div class="meta">VS Code, Eclipse, IntelliJ, WordPress, Figma, MS Office, Canva</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership -->
+    <section id="leadership">
+      <h2 class="section-head">// Leadership & Activities</h2>
+      <div class="ornament"></div>
+
+      <div class="xp-list">
+        <article class="xp-card reveal">
+          <div class="xp-grid">
+            <div class="xp-when">Aug 2025 
+                           <br> Ames, IA</div>
+            <div>
+              <h3 class="xp-title">Destination Iowa State (DIS) — Team Leader</h3>
+              <p class="xp-desc">Guided and mentored 20 new students; coordinated activities and logistics to support a smooth transition to campus life.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="xp-card reveal">
+          <div class="xp-grid">
+            <div class="xp-when">Mar 2025 – Apr 2025 
+                              Ames, IA</div>
+            <div>
+              <h3 class="xp-title">Grammar Platform Evaluation — Student Representative</h3>
+              <p class="xp-desc">Participated in a $360K+ university vendor evaluation; analyzed usability, accessibility, analytics, support, and contracts; contributed to the final recommendation selecting Grammarly.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="xp-card reveal">
+          <div class="xp-grid">
+            <div class="xp-when">Feb 2024 – Mar 2025 
+                 Ames, IA</div>
+            <div>
+              <h3 class="xp-title">Indian Student Association (ISA) — Logistics Head & Active Member</h3>
+              <p class="xp-desc">Managed logistics for cultural events (200+ attendees), including venue setup, scheduling, vendors, outreach, and registration.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2 class="section-head">// Contact Me</h2>
+      <div class="ornament"></div>
+      <div class="card reveal">
+        <div class="tabs">
+          <div class="tablist" role="tablist" aria-label="Contact methods">
+            <button class="tab is-active" role="tab" aria-selected="true" aria-controls="tab-msg" id="tabbtn-msg" data-tab="msg">Message</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="tab-links" id="tabbtn-links" data-tab="links">Links</button>
+          </div>
+
+          <!-- Panel: Message -->
+          <div id="tab-msg" role="tabpanel" tabindex="0" class="tabpanel" aria-labelledby="tabbtn-msg">
+            <div class="grid two">
+              <form id="contactForm" class="form">
+                <div class="field">
+                  <label class="flabel">Name</label>
+                  <input required name="name" autocomplete="name" />
+                </div>
+                <div class="field">
+                  <label class="flabel">Email</label>
+                  <input required type="email" name="email" inputmode="email" autocomplete="email" />
+                </div>
+                <div class="field">
+                  <label class="flabel">Reason</label>
+                  <select name="reason" required>
+                    <option value="" disabled selected>Select one…</option>
+                    <option>Internship</option>
+                    <option>Project collaboration</option>
+                    <option>Quick question</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="flabel">Subject</label>
+                  <input name="subject" placeholder="e.g., UI help for a student org site" />
+                </div>
+                <div class="field">
+                  <label class="flabel">Message <span class="meta" id="mCount">0/500</span></label>
+                  <textarea name="message" maxlength="500" rows="5" required placeholder="Write a short note…"></textarea>
+                </div>
+                <label class="consent">
+                  <input type="checkbox" required />
+                  <span>I’m OK with you contacting me back about this message.</span>
+                </label>
+                <div class="actions">
+                  <button type="submit" class="btn">Send email</button>
+                  <button type="button" class="btn outline" id="formReset">Reset</button>
+                  <a class="btn outline" href="#gform-embed" onclick="document.getElementById('gform-embed').open=true">Use Google Form</a>
+                </div>
+                <p class="meta">Tip: “Send email” opens your mail app with everything pre-filled (no backend needed).</p>
+              </form>
+
+              <aside>
+                <div class="card" style="min-height:auto">
+                  <strong>Response time</strong>
+                  <div class="meta">Usually within 1–2 business days</div>
+                  <div class="ornament"></div>
+                  <div class="stack">
+                    <button class="chip" data-copy="arnukala@iastate.edu" aria-label="Copy email">Copy Email</button>
+                    <button class="chip" data-copy="+16156242138" aria-label="Copy phone">Copy Phone</button>
+                    <button class="chip" id="downloadVcf">Download vCard</button>
+                  </div>
+                </div>
+                <details id="gform-embed" style="margin-top:12px">
+                  <summary class="badge" style="cursor:pointer">Prefer the Google Form?</summary>
+                  <div class="ratio r16x10" style="margin-top:10px">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4Hvg6AoHV5PXo4w9OcboJh7z8WXEjmVd1_pYq5WXCUo0jSQ/viewform?embedded=true"
+                            title="Contact Anish — Google Form" loading="lazy"></iframe>
+                  </div>
+                </details>
+              </aside>
+            </div>
+          </div>
+
+          <!-- Panel: Links -->
+          <div id="tab-links" role="tabpanel" tabindex="0" hidden class="tabpanel" aria-labelledby="tabbtn-links">
+            <div class="grid two">
+              <a class="card linkcard" href="mailto:arnukala@iastate.edu">
+                <div><strong>Email</strong><div class="meta">arnukala@iastate.edu</div></div>
+              </a>
+              <a class="card linkcard" href="tel:+16156242138">
+                <div><strong>Phone</strong><div class="meta">+1 (615) 624-2138</div></div>
+              </a>
+              <a class="card linkcard" href="https://www.linkedin.com/in/anishnukala" target="_blank" rel="noreferrer">
+                <div><strong>LinkedIn</strong><div class="meta">linkedin.com/in/anishnukala</div></div>
+              </a>
+              <a class="card linkcard" href="https://github.com/" target="_blank" rel="noreferrer">
+                <div><strong>GitHub</strong><div class="meta">github.com/your-handle</div></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Print anchor -->
+    <section id="resume" aria-label="Resume section" style="height:1px"></section>
+  </main>
+
+  <footer>
+    <div class="wrap">©️ <span id="y"></span> Anish Reddy Nukala. All rights reserved.</div>
+  </footer>
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Anish Reddy Nukala",
+    "jobTitle": "Computer Science Student",
+    "alumniOf": {"@type":"CollegeOrUniversity","name":"Iowa State University"},
+    "sameAs": ["https://www.linkedin.com/in/anishnukala"],
+    "email": "mailto:arnukala@iastate.edu",
+    "telephone": "+1-615-624-2138"
+  }
+  </script>
+
+  <script>
+    // Scroll progress + active link
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+    const scrollLine = document.getElementById('scroll-line');
+
+    function highlightSection() {
+      const scrollY = window.scrollY + 150;
+      sections.forEach(sec => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+        if (scrollY >= top && scrollY < top + height) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
+          });
+        }
+      });
+    }
+    function updateScrollLine() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrolled = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      scrollLine.style.width = scrolled + "%";
+    }
+    window.addEventListener('scroll', () => { highlightSection(); updateScrollLine(); });
+
+    // Year
+    const yEl = document.getElementById('y'); if (yEl) yEl.textContent = new Date().getFullYear();
+
+    // Reveal-on-scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('_in'); io.unobserve(e.target); } });
+    },{threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Cursor spotlight position
+    const setSpot = (x,y)=>{ document.body.style.setProperty('--mx', x+'px'); document.body.style.setProperty('--my', y+'px'); };
+    window.addEventListener('mousemove', (e)=> setSpot(e.clientX, e.clientY), {passive:true});
+    window.addEventListener('touchmove', (e)=>{ const t=e.touches[0]; if(t) setSpot(t.clientX, t.clientY); }, {passive:true});
+
+    // Dim/brighten spotlight on idle
+    let spotTimer=null; const dim=()=>{ document.body.style.setProperty('--spot-alpha','0.04'); }; const brighten=()=>{ document.body.style.setProperty('--spot-alpha','0.10'); };
+    const poke=()=>{ brighten(); clearTimeout(spotTimer); spotTimer=setTimeout(dim, 1600); };
+    ['mousemove','touchstart','touchmove'].forEach(ev=>window.addEventListener(ev,poke,{passive:true})); dim();
+
+    // Print / Download resume
+    const printBtn = document.getElementById('printBtn');
+    if (printBtn) {
+      printBtn.addEventListener('click', (e)=>{ e.preventDefault(); location.hash = '#resume'; setTimeout(()=>window.print(), 50); });
+    }
+
+    // Tabs (contact)
+    const tabBtns = document.querySelectorAll('.tablist .tab');
+    const panels = ['msg','links'].map(id => document.getElementById('tab-' + id)).filter(Boolean);
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('is-active'); btn.setAttribute('aria-selected','true');
+        panels.forEach(p => p.hidden = true);
+        const id = btn.dataset.tab;
+        const tgt = document.getElementById('tab-' + id);
+        if (tgt) tgt.hidden = false;
+      });
+    });
+
+    // Contact form
+    const form = document.getElementById('contactForm');
+    const resetBtn = document.getElementById('formReset');
+    const mCount = document.getElementById('mCount');
+
+    if (form) {
+      const msg = form.querySelector('textarea[name="message"]');
+      if (msg && mCount) msg.addEventListener('input', () => mCount.textContent = `${msg.value.length}/500`);
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        const name = fd.get('name');
+        const email = fd.get('email');
+        const subject = fd.get('subject') || 'Message from Portfolio';
+        const message = fd.get('message');
+        const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0A${message}`;
+        window.location.href = `mailto:arnukala@iastate.edu?subject=${encodeURIComponent(subject)}&body=${body}`;
+        showToast('Opening your email app...');
+      });
+      if (resetBtn && mCount) resetBtn.addEventListener('click', () => { form.reset(); mCount.textContent = '0/500'; });
+    }
+
+    // Copy buttons & toast
+    function copyText(text) { navigator.clipboard.writeText(text).then(() => showToast('Copied!')); }
+    document.querySelectorAll('.chip[data-copy]').forEach(btn => btn.addEventListener('click', () => copyText(btn.getAttribute('data-copy'))));
+
+    let toastEl = null;
+    function showToast(msg) {
+      if (!toastEl) {
+        toastEl = document.createElement('div');
+        toastEl.className = 'toast';
+        document.body.appendChild(toastEl);
+      }
+      toastEl.textContent = msg;
+      toastEl.classList.add('_show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toastEl.classList.remove('_show'), 1800);
+    }
+  </script>
+</body>
+</html>
