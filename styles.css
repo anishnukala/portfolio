@@ -29,6 +29,7 @@ body::before{
 
 .wrap{ max-width:1060px; margin:0 auto; padding:24px }
 
+
 /* Reveal on scroll helper */
 .reveal{ opacity:0; transform:translateY(8px); transition:all .5s ease }
 .reveal._in{ opacity:1; transform:none }
@@ -230,9 +231,8 @@ img, video, iframe { max-width: 100%; height: auto; }
   background-color:#2a2a2a; border-color:#777;
 }
 
-/* Center the Get in Touch card inside its column */
 #contact .grid.two {
-  align-items: center;         /* vertically centers items */
+  align-items: center;        
 }
 
 
@@ -295,3 +295,16 @@ footer p{ margin:4px 0; font-size:14px }
 
 /* Utilities */
 .hidden{ display:none !important }
+
+/* Soft highlight text used in About Me section */
+.highlight {
+  font-weight: 500; /* medium instead of heavy bold */
+  color: #f9fafb;   /* slightly brighter than normal text */
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.15); /* subtle glow */
+  letter-spacing: 0.2px;
+}
+
+html.light .highlight {
+  color: #1f2937;   /* dark gray for light mode */
+  text-shadow: none;
+}
