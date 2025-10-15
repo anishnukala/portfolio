@@ -56,8 +56,23 @@ body::before{
   border:1px solid var(--line); border-radius:14px; padding:18px;
   display:flex; flex-direction:column; min-height:100%;
   transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  isolation: isolate;
 }
 .card:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.25); border-color:#3a3a3a }
+
+.xp-card{
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:linear-gradient(180deg, var(--bg-2), color-mix(in oklab, var(--bg-2) 90%, #000 10%));
+  padding:18px;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.xp-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  border-color: #3a3a3a;
+}
 
 section{ padding:22px 0 }
 .section-head{
@@ -161,6 +176,13 @@ main{ margin-top: 0 }
 }
 .proj-img img{ width:100%; height:100%; object-fit:cover; filter:brightness(.82) contrast(1.02) }
 
+.op-head {
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .35px;
+  margin-bottom: 10px;
+}
 /* Skills section look */
 #skills .grid .card{
   background:linear-gradient(180deg, var(--bg-2), color-mix(in oklab, var(--bg-2) 90%, #000 10%));
@@ -207,6 +229,12 @@ img, video, iframe { max-width: 100%; height: auto; }
 #contactForm .actions .btn:hover, #contactForm .actions .btn.outline:hover{
   background-color:#2a2a2a; border-color:#777;
 }
+
+/* Center the Get in Touch card inside its column */
+#contact .grid.two {
+  align-items: center;         /* vertically centers items */
+}
+
 
 /* Chips stack (optional helpers you had) */
 .stack{ display:flex; flex-direction:column; gap:10px }
