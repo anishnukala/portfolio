@@ -122,7 +122,7 @@ header#top{
   font-family:'Fira Code', monospace;
   color:#ffffff; margin:0; white-space:nowrap; display:inline-block;
   overflow:hidden; border-right:3px solid #ffffff;
-  animation:typing 3s steps(30,end) forwards, blink .8s step-end infinite;
+  animation:typing 3s steps(30,end) backwards, blink .8s step-end infinite;
 }
 @keyframes typing{ from{ width:0 } to{ width:100% } }
 @keyframes blink{ 50%{border-color:transparent} }
