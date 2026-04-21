@@ -532,6 +532,11 @@ main{ margin-top: 0 }
   font-size:inherit;
   font-weight:inherit;
 }
+#projects .card.project h4{
+  font-size:24px;
+  line-height:1.1;
+  margin:0 0 10px;
+}
 /* Skills section look */
 .logo-scroller{
   position:relative;
@@ -653,9 +658,46 @@ img, video, iframe { max-width: 100%; height: auto; }
 .linkcard:hover{ background:#1c1e21; border-color:#555; transform:translateY(-1px) }
 .linkcard-content{ display:flex; align-items:center; gap:12px }
 .icon{ width:24px; height:24px; fill:#9ca3af; flex-shrink:0 }
+.icon-image{ object-fit:contain; display:block }
 .link-title{ margin:0; font-weight:700; font-size:18px; color:#e2e8f0 }
 .link-sub{ color:#d1d5db; font-size:16px; text-decoration:underline; line-height:1.7; font-weight:400 }
 .contact-links{ display:flex; flex-direction:column; gap:14px; margin-top:16px }
+
+.linkcard-email{
+  border-color:rgba(234, 179, 8, 0.38);
+  background:linear-gradient(180deg, rgba(234, 179, 8, 0.14), rgba(20, 20, 22, 0.98));
+}
+.linkcard-email:hover{
+  background:linear-gradient(180deg, rgba(234, 179, 8, 0.22), rgba(28, 30, 33, 0.98));
+  border-color:rgba(234, 179, 8, 0.62);
+}
+.linkcard-email .icon{
+  fill:#facc15;
+}
+
+.linkcard-linkedin{
+  border-color:rgba(10, 102, 194, 0.42);
+  background:linear-gradient(180deg, rgba(10, 102, 194, 0.16), rgba(20, 20, 22, 0.98));
+}
+.linkcard-linkedin:hover{
+  background:linear-gradient(180deg, rgba(10, 102, 194, 0.24), rgba(28, 30, 33, 0.98));
+  border-color:rgba(10, 102, 194, 0.68);
+}
+.linkcard-linkedin .icon{
+  fill:#60a5fa;
+}
+
+.linkcard-github{
+  border-color:rgba(148, 163, 184, 0.35);
+  background:linear-gradient(180deg, rgba(148, 163, 184, 0.14), rgba(20, 20, 22, 0.98));
+}
+.linkcard-github:hover{
+  background:linear-gradient(180deg, rgba(148, 163, 184, 0.22), rgba(28, 30, 33, 0.98));
+  border-color:rgba(148, 163, 184, 0.58);
+}
+.linkcard-github .icon{
+  fill:#e2e8f0;
+}
 
 /* Contact form (unified gray) */
 .field{
@@ -685,6 +727,9 @@ img, video, iframe { max-width: 100%; height: auto; }
 
 #contact .grid.two {
   align-items: stretch;
+}
+#contact aside{
+  margin-top:72px;
 }
 .contact-side{
   min-height:100%;
