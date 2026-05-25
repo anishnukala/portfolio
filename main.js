@@ -178,6 +178,34 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+// ===== LinkedIn post scroll activation =====
+const linkedinPostCards = Array.from(document.querySelectorAll('.linkedin-post-card'));
+
+function deactivateLinkedInPosts() {
+  linkedinPostCards.forEach(card => card.classList.remove('is-active'));
+}
+
+linkedinPostCards.forEach(card => {
+  card.addEventListener('click', (event) => {
+    event.stopPropagation();
+    deactivateLinkedInPosts();
+    card.classList.add('is-active');
+  });
+
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      deactivateLinkedInPosts();
+      card.classList.add('is-active');
+    }
+  });
+});
+
+document.addEventListener('click', deactivateLinkedInPosts);
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') deactivateLinkedInPosts();
+});
+
 // ===== Contact form =====
 const form = document.getElementById('contactForm');
 const resetBtn = document.getElementById('formReset');
