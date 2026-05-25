@@ -28,3 +28,5 @@ HTML5, CSS3, JavaScript (Vanilla), Responsive Design, Intersection Observer API,
 │── styles.css       # Styling and layout
 │── main.js          # Interactivity and logic
 │── assets/          # Images, icons, media
+```
+<img width="1800" height="1004" alt="image" src="https://github.com/user-attachments/assets/25d17571-3b49-4654-aa92-87561283fa38" />
