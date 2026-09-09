@@ -6594,6 +6594,13 @@ footer .ornament{
   }
 }
 
+@media (max-width:720px){
+  #about .about-description{
+    font-size:clamp(14px, 4vw, 17px);
+    line-height:1.55;
+  }
+}
+
 @media (min-width:721px){
   #projects .featured .skills,
   #projects .featured .corpay-skills{
