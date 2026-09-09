@@ -874,8 +874,8 @@
   body .about-laptop {
     display:block !important;
     width:100%;
-    max-width:560px;
-    margin:28px auto 18px;
+    max-width:680px;
+    margin:10px auto 18px;
     overflow:visible;
   }
 
@@ -884,7 +884,71 @@
     margin:0 auto;
   }
 
+  body .about-laptop .laptop-os-laptop {
+    width:94%;
+    --pose-yaw:-18deg;
+    --pose-pitch:-18deg;
+    --pose-scale:.92;
+    transform:translateX(10%) rotateY(calc(var(--pose-yaw) + var(--tilt-y,0deg))) rotateX(calc(var(--pose-pitch) + var(--tilt-x,0deg))) scale(var(--pose-scale));
+  }
+
+  body .about-laptop .laptop-os-screen {
+    height:auto;
+    aspect-ratio:560 / 330;
+  }
+
   body .about-laptop .laptop-os-desktop {
-    height:clamp(170px, 52cqw, 330px);
+    position:absolute;
+    inset:0 auto auto 0;
+    width:560px;
+    height:330px;
+    grid-template-rows:25px minmax(0,1fr) 48px;
+    transform:scale(var(--laptop-os-desktop-scale,.5));
+    transform-origin:top left;
+  }
+
+  body .about-laptop .laptop-os-menu-bar {
+    padding:0 10px;
+    font-size:9px;
+  }
+
+  body .about-laptop .laptop-os-menu-left,
+  body .about-laptop .laptop-os-menu-right {
+    gap:8px;
+  }
+
+  body .about-laptop .laptop-os-desktop-icons {
+    padding:18px;
+    gap:12px 8px;
+    font-size:9px;
+  }
+
+  body .about-laptop .laptop-os-app-window {
+    width:90%;
+    margin-top:12px;
+  }
+
+  body .about-laptop .laptop-os-window-header {
+    height:30px;
+    font-size:10px;
+  }
+
+  body .about-laptop .laptop-os-window-content {
+    padding:14px;
+    overflow:visible;
+  }
+
+  body .about-laptop .laptop-os-about-content h3 {
+    font-size:22px;
+  }
+
+  body .about-laptop .laptop-os-terminal-line input {
+    font-size:12px;
+  }
+
+  body .about-laptop .laptop-os-dock {
+    display:flex;
+    grid-template-columns:none;
+    gap:6px;
   }
 }

@@ -17,6 +17,7 @@
   const appButtons = [...root.querySelectorAll('[data-window]')];
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+  const mobileLayout = matchMedia('(max-width:720px)');
   const tourWindows = ['about', 'skills', 'experience', 'projects', 'education', 'contact', 'resume'].map(name => `laptop-os-${name}Window`);
   const windowEffects = new Map();
   let tourTimer = null;
@@ -40,14 +41,14 @@
     if (!content || !header) return;
     content.style.zoom = '1';
     const availableHeight = app.clientHeight - header.offsetHeight;
-    if (availableHeight <= 0 || content.scrollHeight <= availableHeight) return;
+    const contentHeight = content.scrollHeight;
+    if (availableHeight <= 0 || contentHeight <= availableHeight) return;
 
     let lower = 0.1;
     let upper = 1;
     for (let step = 0; step < 10; step++) {
       const scale = (lower + upper) / 2;
-      content.style.zoom = String(scale);
-      if (content.scrollHeight * scale <= availableHeight + 0.5) lower = scale;
+      if (contentHeight * scale <= availableHeight + 0.5) lower = scale;
       else upper = scale;
     }
     content.style.zoom = String(Math.floor(lower * 1000) / 1000);
@@ -58,6 +59,14 @@
     contentFitFrame = requestAnimationFrame(() => {
       fitWindowContent(root.querySelector('.laptop-os-app-window.active'));
     });
+  }
+
+  function syncDesktopScale() {
+    if (!mobileLayout.matches) {
+      desktop.style.removeProperty('--laptop-os-desktop-scale');
+      return;
+    }
+    desktop.style.setProperty('--laptop-os-desktop-scale', String(screen.clientWidth / 560));
   }
 
   function stopTourTimer() {
@@ -356,11 +365,21 @@ Email    anishnukala@gmail.com
     }
   });
 
+  syncDesktopScale();
+  mobileLayout.addEventListener('change', syncDesktopScale);
   if ('ResizeObserver' in window) {
+    const screenObserver = new ResizeObserver(() => {
+      syncDesktopScale();
+      scheduleContentFit();
+    });
+    screenObserver.observe(screen);
     const sizeObserver = new ResizeObserver(scheduleContentFit);
     windows.forEach(app => sizeObserver.observe(app));
   } else {
-    window.addEventListener('resize', scheduleContentFit);
+    window.addEventListener('resize', () => {
+      syncDesktopScale();
+      scheduleContentFit();
+    });
   }
   const contentObserver = new MutationObserver(scheduleContentFit);
   windows.forEach(app => contentObserver.observe(app, { childList:true, characterData:true, subtree:true }));
