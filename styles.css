@@ -6570,30 +6570,6 @@ footer .ornament{
   }
 }
 
-@media (min-width:1181px){
-  #projects .featured .proj-card,
-  #projects .corpay-featured .proj-card{
-    height:430px;
-    min-height:430px;
-  }
-}
-
-@media (min-width:900px) and (max-width:1180px){
-  #projects .featured .proj-card,
-  #projects .corpay-featured .proj-card{
-    height:560px;
-    min-height:560px;
-  }
-}
-
-@media (min-width:721px) and (max-width:899px){
-  #projects .featured .proj-card,
-  #projects .corpay-featured .proj-card{
-    height:650px;
-    min-height:650px;
-  }
-}
-
 @media (max-width:720px){
   #about .about-description{
     font-size:clamp(14px, 4vw, 17px);
@@ -6604,7 +6580,65 @@ footer .ornament{
 @media (min-width:721px){
   #projects .featured .skills,
   #projects .featured .corpay-skills{
-    position:relative;
-    top:-12px;
+    position:static;
+    top:auto;
+  }
+}
+
+/* Preserve the overlaid card design while allowing content to grow at browser zoom. */
+@media (min-width:721px){
+  #projects .featured .proj-award{
+    left:-56px;
+  }
+
+  #projects .featured .proj-card,
+  #projects .corpay-featured .proj-card{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
+    align-content:start;
+    align-items:start;
+    gap:10px;
+    height:auto;
+    min-height:430px;
+    padding:14px clamp(28px, 3vw, 48px) 28px;
+  }
+
+  #projects .featured .proj-card > *{
+    grid-column:1 / -1;
+    min-width:0;
+    max-width:100%;
+    overflow-wrap:anywhere;
+  }
+
+  #projects .featured .proj-card .badge,
+  #projects .featured .proj-card .proj-kicker{
+    position:static;
+    inset:auto;
+    margin:0 0 16px;
+    transform:none;
+    grid-row:1;
+    align-self:start;
+  }
+
+  #projects .featured .proj-card .proj-kicker{
+    grid-column:1;
+  }
+
+  #projects .featured .proj-award ~ .proj-kicker{
+    padding-left:42px;
+  }
+
+  #projects .featured .proj-card .badge{
+    grid-column:2;
+    justify-self:end;
+  }
+
+  #projects .featured .skill-pill{
+    white-space:normal;
+    max-width:100%;
+  }
+
+  #projects .corpay-project-card p.project-disclaimer{
+    white-space:normal;
   }
 }
